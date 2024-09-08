@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularNetcoreEmployeesTable", "AngularNetcoreEmployeesTable\AngularNetcoreEmployeesTable.csproj", "{7CE3C3F7-D173-4752-9C96-4111547AD468}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CE3C3F7-D173-4752-9C96-4111547AD468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CE3C3F7-D173-4752-9C96-4111547AD468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CE3C3F7-D173-4752-9C96-4111547AD468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CE3C3F7-D173-4752-9C96-4111547AD468}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD2EA03C-9ABE-469C-B056-A67335470377}
+	EndGlobalSection
+EndGlobal
