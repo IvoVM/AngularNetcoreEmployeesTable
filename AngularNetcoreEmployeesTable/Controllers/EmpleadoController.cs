@@ -33,6 +33,9 @@ namespace AngularNetcoreEmployeesTable.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Empleado empleadoData)
         {
+            Console.WriteLine($"Received data: {empleadoData}");
+
+
             bool answer = await _empleadoData.Post(empleadoData);
             return StatusCode(StatusCodes.Status200OK, new { isSuccess = answer });
         }

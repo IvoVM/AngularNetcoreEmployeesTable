@@ -81,41 +81,43 @@ namespace AngularNetcoreEmployeesTable.Data
             return empleado;
         }
 
+
         public async Task<bool> Post(Empleado objeto)
         {
             bool respuesta = true;
-            try
+
+            using (var con = new SqlConnection(connection))
             {
-                using (var con = new SqlConnection(connection))
+
+                SqlCommand cmd = new SqlCommand("sp_crearEmpleado", con);
+                cmd.Parameters.AddWithValue("@NombreCompleto", objeto.NombreCompleto);
+                cmd.Parameters.AddWithValue("@Correo", objeto.Correo);
+                cmd.Parameters.AddWithValue("@Sueldo", objeto.Sueldo);
+                cmd.Parameters.AddWithValue("@FechaContrato", objeto.FechaContrato);
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
                 {
                     await con.OpenAsync();
-                    SqlCommand cmd = new SqlCommand("sp_crearEmpleado", con);
-                    cmd.Parameters.AddWithValue("@NombreCompleto", objeto.NombreCompleto);
-                    cmd.Parameters.AddWithValue("@Correo", objeto.Correo);
-                    cmd.Parameters.AddWithValue("@Sueldo", objeto.Sueldo);
-                    cmd.Parameters.AddWithValue("@FechaContrato", objeto.FechaContrato);
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    await con.OpenAsync();
                     respuesta = await cmd.ExecuteNonQueryAsync() > 0 ? true : false;
-                };
+                }
+                catch
+                {
+                    respuesta = false;
+                }
             }
-            catch
-            {
-                respuesta = false;
-            }
-
             return respuesta;
         }
+
+
+
+
 
         public async Task<bool> Put(Empleado objeto)
         {
             bool respuesta = true;
-            try
-            {
+           
                 using (var con = new SqlConnection(connection))
                 {
-                    await con.OpenAsync();
                     SqlCommand cmd = new SqlCommand("sp_editarEmpleado", con);
                     cmd.Parameters.AddWithValue("@IdEmpleado", objeto.IdEmpleado);
                     cmd.Parameters.AddWithValue("@NombreCompleto", objeto.NombreCompleto);
@@ -124,14 +126,17 @@ namespace AngularNetcoreEmployeesTable.Data
                     cmd.Parameters.AddWithValue("@FechaContrato", objeto.FechaContrato);
 
                     cmd.CommandType = CommandType.StoredProcedure;
+                    try
+                     {
                     await con.OpenAsync();
                     respuesta = await cmd.ExecuteNonQueryAsync() > 0 ? true : false;
-                };
-            }
-            catch
-            {
-                respuesta = false;
-            }
+                    }
+                catch {
+                    respuesta = false;
+                }
+   };
+            
+           
 
             return respuesta;
         }
@@ -139,23 +144,27 @@ namespace AngularNetcoreEmployeesTable.Data
         public async Task<bool> Delete(int Id)
         {
             bool respuesta = true;
-            try
+
+            using (var con = new SqlConnection(connection))
             {
-                using (var con = new SqlConnection(connection))
+                SqlCommand cmd = new SqlCommand("sp_eliminarEmpleado", con);
+                cmd.Parameters.AddWithValue("@IdEmpleado", Id);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
                 {
                     await con.OpenAsync();
-                    SqlCommand cmd = new SqlCommand("sp_eliminarEmpleado", con);
-                    cmd.Parameters.AddWithValue("@IdEmpleado",Id);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    await con.OpenAsync();
                     respuesta = await cmd.ExecuteNonQueryAsync() > 0 ? true : false;
-                };
+
+                }
+                catch
+                {
+                    respuesta = false;
+                }
+
             }
-            catch
-            {
-                respuesta = false;
-            }
+            
+           
 
             return respuesta;
         }
