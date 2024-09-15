@@ -115,28 +115,27 @@ namespace AngularNetcoreEmployeesTable.Data
         public async Task<bool> Put(Empleado objeto)
         {
             bool respuesta = true;
-           
-                using (var con = new SqlConnection(connection))
-                {
-                    SqlCommand cmd = new SqlCommand("sp_editarEmpleado", con);
-                    cmd.Parameters.AddWithValue("@IdEmpleado", objeto.IdEmpleado);
-                    cmd.Parameters.AddWithValue("@NombreCompleto", objeto.NombreCompleto);
-                    cmd.Parameters.AddWithValue("@Correo", objeto.Correo);
-                    cmd.Parameters.AddWithValue("@Sueldo", objeto.Sueldo);
-                    cmd.Parameters.AddWithValue("@FechaContrato", objeto.FechaContrato);
 
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    try
-                     {
+            using (var con = new SqlConnection(connection))
+            {
+                SqlCommand cmd = new SqlCommand("sp_editarEmpleado", con);
+                cmd.Parameters.AddWithValue("@IdEmpleado", objeto.IdEmpleado);
+                cmd.Parameters.AddWithValue("@NombreCompleto", objeto.NombreCompleto);
+                cmd.Parameters.AddWithValue("@Correo", objeto.Correo);
+                cmd.Parameters.AddWithValue("@Sueldo", objeto.Sueldo);
+                cmd.Parameters.AddWithValue("@FechaContrato", objeto.FechaContrato);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
                     await con.OpenAsync();
                     respuesta = await cmd.ExecuteNonQueryAsync() > 0 ? true : false;
-                    }
-                catch {
+                }
+                catch
+                {
                     respuesta = false;
                 }
-   };
-            
-           
+            };
 
             return respuesta;
         }
@@ -163,12 +162,9 @@ namespace AngularNetcoreEmployeesTable.Data
                 }
 
             }
-            
-           
 
             return respuesta;
         }
-
 
     }
 }
